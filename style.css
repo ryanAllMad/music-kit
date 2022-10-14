@@ -1,0 +1,128 @@
+html {
+  font-size: 10px;
+}
+
+body,html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.keys, .piano-keys {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  flex-flow: wrap;
+}
+.keys {
+  align-items: flex-end;
+  border-bottom: 1rem solid hsl(303, 100%, 50%);
+}
+.piano-keys {
+  align-items: flex-start;
+}
+.keys h2, .piano-keys h2 {
+  flex: 100%;
+  text-align: center;
+  font-size: 2.5rem;
+  align-self: flex-end;
+}
+.keys h2 {
+  align-self: flex-end;
+}
+.piano-keys h2 {
+  align-self: flex-start;
+}
+.key {
+  border: 1rem solid white;
+  outline: 1rem solid black;
+  border-radius: 100%;
+  margin: 1.5rem;
+  font-size: 1.5rem;
+  padding: 1rem;
+  transition: all .07s ease;
+  width: 10rem;
+  height: 10rem;
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  text-shadow: 0 0 .5rem black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition-duration: .3s;
+  transition-timing-function: ease-out;
+}
+
+
+.playing {
+  transform: scale(1.1);
+  box-shadow: none;
+  border: 1rem solid transparent;
+  outline: 1rem solid hsl(303, 100%, 50%);
+}
+
+kbd {
+  display: block;
+  font-size: 4rem;
+}
+
+.sound {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  color: white;
+}
+[data-key="90"] {
+  background-color: hsl(329, 100%, 50%);
+}
+[data-key="88"] {
+  background-color: hsl(303, 100%, 50%);
+}
+[data-key="83"] {
+  background-color: hsl(286, 100%, 50%);
+}
+[data-key="78"] {
+  background-color: hsl(264, 100%, 50%);
+}
+[data-key="77"] {
+  background-color: hsl(228, 100%, 50%);
+}
+[data-key="72"] {
+  background-color: hsl(193, 100%, 50%);
+}
+[data-key="74"] {
+  background-color: hsl(166, 100%, 50%);
+}
+[data-key="75"] {
+  background-color: hsl(105, 100%, 50%);
+}
+[data-key="76"] {
+  background-color: hsl(70, 100%, 50%);
+}
+
+/*piano keys*/
+[data-key="66"] {
+  background-color: hsl(303, 53%, 55%);
+}
+[data-key="65"] {
+  background-color: hsl(271, 53%, 55%);
+}
+[data-key="71"] {
+  background-color: hsl(236, 53%, 55%);
+}
+[data-key="70"] {
+  background-color: hsl(177, 53%, 55%);
+}
+[data-key="69"] {
+  background-color: hsl(147, 53%, 55%);
+}
+[data-key="68"] {
+  background-color: hsl(116, 53%, 55%);
+}
+[data-key="67"] {
+  background-color: hsl(63, 53%, 55%);
+}
