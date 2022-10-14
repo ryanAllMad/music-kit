@@ -36,6 +36,8 @@ body,html {
   align-self: flex-start;
 }
 .key {
+  position: relative;
+  z-index: 1;
   border: 1rem solid white;
   outline: 1rem solid black;
   border-radius: 100%;
@@ -57,6 +59,12 @@ body,html {
   transition-timing-function: ease-out;
 }
 
+.key > * {
+  position: relative;
+  z-index: -1;
+  /*fix ux issues with keys */
+  user-select: none;
+}
 
 .playing {
   transform: scale(1.1);
