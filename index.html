@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Music App for the kid</title>
+  <title>Music Master</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -94,7 +94,6 @@
   <audio data-key="71" src="sounds/g.m4a"></audio>
   <audio data-key="65" src="sounds/a.m4a"></audio>
   <audio data-key="66" src="sounds/b.m4a"></audio>
-k
 <script>
 
 function playSound(e) {
@@ -103,7 +102,15 @@ function playSound(e) {
   if(!audio) return
   audio.currentTime = 0
   audio.play()
-  key.classList.add('playing')
+  if(!key.classList.contains('playing')){
+    key.classList.add('playing')
+  }
+}
+function removePlaying(e) {
+  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
+  if(key.classList.contains('playing')){
+    key.classList.remove('playing')
+  }
 }
 function clickSound(e) {
   const audio = document.querySelector(`audio[data-key="${e.target.dataset.key}"]`)
@@ -111,7 +118,9 @@ function clickSound(e) {
   if(!audio) return
   audio.currentTime = 0
   audio.play()
+  if(!key.classList.contains('playing')){
   key.classList.add('playing')
+  }
 }
 
 function clickChilds(e) {
@@ -130,6 +139,9 @@ const keyChildren = document.querySelectorAll('.key > *')
 keys.forEach(key => key.addEventListener('transitionend', removeTransition))
 
 window.addEventListener('keydown', playSound)
+window.addEventListener('keyup', removePlaying)
+window.addEventListener('mouseup', removePlaying)
+window.addEventListener('touchend', removePlaying)
 // Fix ux issues with keys
 keys.forEach(key => key.addEventListener('click', (e) => clickSound(e)))
 keyChildren.forEach(keyKid => keyKid.addEventListener('click', (e) => {
