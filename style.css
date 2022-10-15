@@ -20,6 +20,10 @@ body,html {
   align-items: flex-end;
   border-bottom: 1rem solid hsl(303, 100%, 50%);
 }
+canvas {
+  border: 1rem solid hsl(303, 100%, 50%);
+  max-width: calc(100% - 2rem);
+}
 .drum-keys {
   align-items: flex-start;
 }
@@ -133,4 +137,12 @@ kbd {
 }
 [data-key="67"] {
   background-color: hsl(63, 53%, 55%);
+}
+.player__button {
+  background-color: transparent;
+  font-size: 5rem;
+  border: none;
+  width: 100%;
+  text-align: center;
+  color: hsl(329, 100%, 50%);
 }

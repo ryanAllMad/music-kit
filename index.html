@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <div class="keys">
     <h2>Piano Keys</h2>
     <div data-key="67" class="key">
@@ -77,6 +78,8 @@
       <span class="sound">tink</span>
     </div>
   </div>
+  <button class="player__button toggle" title="Toggle Play">►</button>
+  <canvas id="draw" width="800" height="800"></canvas>
   <audio data-key="74" src="sounds/clap.wav"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
   <audio data-key="88" src="sounds/kick.wav"></audio>
@@ -94,55 +97,8 @@
   <audio data-key="71" src="sounds/g.m4a"></audio>
   <audio data-key="65" src="sounds/a.m4a"></audio>
   <audio data-key="66" src="sounds/b.m4a"></audio>
-<script>
-
-function playSound(e) {
-  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
-  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
-  if(!audio) return
-  audio.currentTime = 0
-  audio.play()
-  if(!key.classList.contains('playing')){
-    key.classList.add('playing')
-  }
-}
-function clickSound(e) {
-  const audio = document.querySelector(`audio[data-key="${e.target.dataset.key}"]`)
-  const key = document.querySelector(`.key[data-key="${e.target.dataset.key}"]`)
-  if(!audio) return
-  audio.currentTime = 0
-  audio.play()
-  if(!key.classList.contains('playing')){
-  key.classList.add('playing')
-  }
-}
-
-function clickChilds(e) {
-  const audio = document.querySelector(`audio[data-key="${e.target.dataset.key}"]`)
-  if(!audio) return
-  audio.currentTime = 0
-  audio.play()
-}
-function removeTransition(e) {
-if(!e.target.classList.contains('playing')) return 
-e.target.classList.remove('playing')
-}
-
-const keys = document.querySelectorAll('.key')
-const keyChildren = document.querySelectorAll('.key > *')
-keys.forEach(key => key.addEventListener('transitionend', removeTransition))
-
-window.addEventListener('keydown', playSound)
-window.addEventListener('keyup', removeTransition)
-window.addEventListener('mouseup', removeTransition)
-window.addEventListener('touchend', removeTransition)
-// Fix ux issues with keys
-keys.forEach(key => key.addEventListener('click', (e) => clickSound(e)))
-keyChildren.forEach(keyKid => keyKid.addEventListener('click', (e) => {
-  e.target.setAttribute('data-key', e.target.parentElement.dataset.key )
-}))
-</script>
-
-
+  <audio id="song" src="sounds/1-20 P.Y.T. (Pretty Young Thing).mp3"></audio>
+  <script type="text/javascript" src="./sound.js"></script>
+  <script type="text/javascript" src="./draw.js"></script>
 </body>
 </html>
