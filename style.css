@@ -22,7 +22,8 @@ body,html {
 }
 canvas {
   border: 1rem solid hsl(303, 100%, 50%);
-  max-width: calc(100% - 2rem);
+  max-width: calc(100% - 10rem);
+  margin: 4rem;
 }
 .drum-keys {
   align-items: flex-start;
