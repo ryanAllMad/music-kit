@@ -1,5 +1,6 @@
 const canvas = document.querySelector('#draw')
-  const ctx = canvas.getContext('2d')
+const ctx = canvas.getContext('2d')
+
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
   ctx.strokeStyle = '#BADA55'
@@ -45,34 +46,74 @@ const canvas = document.querySelector('#draw')
 
   // play button
   const toggle = document.querySelector('.toggle')
+  const clear = document.querySelector('.clear')
+ // songs
+ const happySong = document.querySelector('#song')
+ const mellowSong = document.querySelector('#mellow-song')
+ const energySong = document.querySelector('#energy-song')
+ let song = happySong
 
   function updateButton() {
-    const icon = this.paused ? '►' : '❚ ❚'
+    const icon = this.paused ? '► Play Song' : '❚ ❚ Pause Song'
     toggle.textContent = icon
    }
-  function playSound() {
-    const song = document.querySelector('#song')
+  function playSound(song) {
     if(playSong) {
-        song.play()
-        song.addEventListener('play', updateButton)
+      song.play()
+      song.addEventListener('play', updateButton)
     } else {
-    song.pause()
-    song.addEventListener('pause', updateButton)
+      song.pause()
+      song.addEventListener('pause', updateButton)
     }
   }
-  function playTheSong() {
+  function playTheSong(song) {
     playSong = !playSong
     if(playSong) {
-    song.play()
-    song.addEventListener('play', updateButton)
+      song.play()
+      song.addEventListener('play', updateButton)
     } else {
-    song.pause()
-    song.addEventListener('pause', updateButton)
+      song.pause()
+      song.addEventListener('pause', updateButton)
     }
   }
- 
-  toggle.addEventListener('click', playTheSong)
 
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  // Song Buttons
+const mellow = document.querySelector('.mellow')
+const happy = document.querySelector('.happy')
+const energy = document.querySelector('.energy')
+ 
+  // EVENTS
+  toggle.addEventListener('click', () => playTheSong(song))
+  clear.addEventListener('click', clearCanvas)
+
+  mellow.addEventListener('click', () => {
+    canvas.style.backgroundColor = 'hsl(228, 100%, 50%)'
+    ctx.globalCompositeOperation = 'soft-light'
+    song.pause()
+    song = mellowSong
+    song.play()
+    updateButton()
+  })
+  happy.addEventListener('click', () => {
+    canvas.style.backgroundColor = '#ffffff'
+    ctx.globalCompositeOperation = 'lighten'
+    song.pause()
+    song = happySong
+    song.play()
+    updateButton()
+  })
+  energy.addEventListener('click', () => {
+    canvas.style.backgroundColor = 'hsl(166, 100%, 50%)'
+    ctx.globalCompositeOperation = 'difference'
+    song.pause()
+    song = energySong
+    song.play()
+    updateButton()
+  })
 
   canvas.addEventListener('mousedown', (e) =>{
     isDrawing = true
@@ -82,14 +123,12 @@ const canvas = document.querySelector('#draw')
   })
   canvas.addEventListener('mousemove', (e) => {
     draw(e)
-    playSound()
+    playSound(song)
   })
   canvas.addEventListener('mouseup', () => {
-    // playSong = false
     isDrawing = false
   })
   canvas.addEventListener('mouseout', () => {
-    // playSong = false
     isDrawing = false
   })
 
@@ -124,11 +163,9 @@ e.preventDefault()
 }
 // Touch Events
 canvas.addEventListener('touchend', () => {
-    // playSong = false
     isDrawing = false
   }, false)
   canvas.addEventListener('touchcancel', () => {
-    // playSong = false
     isDrawing = false
   }, false)
 canvas.addEventListener('touchstart', (e) => {
@@ -140,6 +177,7 @@ canvas.addEventListener('touchstart', (e) => {
       lastX = e.touches[i].clientX
       lastY = e.touches[i].clientY
       touchDraw(e, i)
+      playSound(song)
     }
   }, false);
 

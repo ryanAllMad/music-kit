@@ -4,6 +4,7 @@ function playSound(e) {
     const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
     if(!audio) return
     audio.currentTime = 0
+    audio.pause()
     audio.play()
     if(!key.classList.contains('playing')){
       key.classList.add('playing')
@@ -14,6 +15,7 @@ function playSound(e) {
     const key = document.querySelector(`.key[data-key="${e.target.dataset.key}"]`)
     if(!audio) return
     audio.currentTime = 0
+    audio.pause()
     audio.play()
     if(!key.classList.contains('playing')){
     key.classList.add('playing')
