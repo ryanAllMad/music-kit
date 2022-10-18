@@ -266,6 +266,29 @@ nav {
 .buttons-top h3 {
   width: 100%;
 }
+.pic {
+  position: relative;
+}
+.pic, .pic img {
+  width: calc(100% - 4rem);
+  margin: 2rem;
+  font-size: 36px;
+  color: hsl(303, 100%, 50%);
+  
+}
+.pic:hover img {
+  opacity: 0.5;
+}
+.pic:hover::before {
+  content: 'Click To Download';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  filter: brightness(1);
+}
+
 @media screen and (max-width: 768px) {
   .menu {
   right: 15px;

@@ -44,9 +44,12 @@ const ctx = canvas.getContext('2d')
     // console.log(e)
   }
 
-  // play button
+  // play buttons
   const toggle = document.querySelector('.toggle')
   const clear = document.querySelector('.clear')
+  const save = document.querySelector('.save')
+  const del = document.querySelector('.delete')
+  const pic = document.querySelector('.opacity .pic')
  // songs
  const happySong = document.querySelector('#song')
  const mellowSong = document.querySelector('#mellow-song')
@@ -57,15 +60,6 @@ const ctx = canvas.getContext('2d')
     const icon = this.paused ? '► Play Song' : '❚ ❚ Pause Song'
     toggle.textContent = icon
    }
-  function playSound(song) {
-    if(playSong) {
-      song.play()
-      song.addEventListener('play', updateButton)
-    } else {
-      song.pause()
-      song.addEventListener('pause', updateButton)
-    }
-  }
   function playTheSong(song) {
     playSong = !playSong
     if(playSong) {
@@ -76,9 +70,25 @@ const ctx = canvas.getContext('2d')
       song.addEventListener('pause', updateButton)
     }
   }
+  function paintToPicture() {
+    const data = canvas.toDataURL('image/png', 0.5)
+    const link = document.createElement('a')
+    console.log(link.href)
+    link.href = data
+    console.log(link.href)
+    link.setAttribute('download', 'drawing')
+    link.innerHTML = `<img width="200" src="${data}" alt="Your drawing" />`
+    pic.insertAdjacentElement('beforeend', link)
+  }
 
   function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+  }
+  function deletePics() {
+    const images = document.querySelectorAll('.pic > *')
+   
+    images.forEach(image => image.remove())
   }
 
   // Song Buttons
@@ -88,7 +98,9 @@ const energy = document.querySelector('.energy')
  
   // EVENTS
   toggle.addEventListener('click', () => playTheSong(song))
+  save.addEventListener('click', paintToPicture)
   clear.addEventListener('click', clearCanvas)
+  del.addEventListener('click', deletePics)
 
   mellow.addEventListener('click', () => {
     canvas.style.backgroundColor = 'hsl(228, 100%, 50%)'
@@ -117,13 +129,11 @@ const energy = document.querySelector('.energy')
 
   canvas.addEventListener('mousedown', (e) =>{
     isDrawing = true
-    playSong = true
     lastX = e.offsetX
     lastY = e.offsetY
   })
   canvas.addEventListener('mousemove', (e) => {
     draw(e)
-    playSound(song)
   })
   canvas.addEventListener('mouseup', () => {
     isDrawing = false
@@ -172,16 +182,14 @@ canvas.addEventListener('touchstart', (e) => {
     // Iterate through the touch points and log each screenX/Y coordinate.
     // The unit of each coordinate is CSS pixels.
     isDrawing = true
-    playSong = true
     for (let i = 0; i < e.touches.length; i++) {
       lastX = e.touches[i].clientX
       lastY = e.touches[i].clientY
       touchDraw(e, i)
-      playSound(song)
     }
   }, false);
 
-canvas.addEventListener('touchmove', (e, i) => {
+canvas.addEventListener('touchmove', (e) => {
   isDrawing = true
     for (let i = 0; i < e.touches.length; i++) {
       lastX = e.touches[i].clientX
